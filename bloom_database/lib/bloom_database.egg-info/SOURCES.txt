@@ -1,0 +1,6 @@
+setup.py
+lib/bloom_database.egg-info/PKG-INFO
+lib/bloom_database.egg-info/SOURCES.txt
+lib/bloom_database.egg-info/dependency_links.txt
+lib/bloom_database.egg-info/not-zip-safe
+lib/bloom_database.egg-info/top_level.txt

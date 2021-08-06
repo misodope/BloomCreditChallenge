@@ -1,29 +1,6 @@
 from . import db
 from sqlalchemy.dialects import postgresql
-from sqlalchemy import (
-    BigInteger,
-    Boolean,
-    CHAR,
-    CheckConstraint,
-    Column,
-    DDL,
-    distinct,
-    event,
-    false,
-    ForeignKey,
-    ForeignKeyConstraint,
-    Index,
-    inspect,
-    Integer,
-    Numeric,
-    SmallInteger,
-    Table,
-    text,
-    Text,
-    true,
-    UniqueConstraint,
-    VARCHAR,
-)
+from sqlalchemy import Integer, Text
 
 class CreditRecords(db.Model):
 
@@ -232,7 +209,3 @@ class CreditRecords(db.Model):
     x0198 = db.Column(Integer)
     x0199 = db.Column(Integer)
     x0200 = db.Column(Integer)
-
-    def __init__(self, id, url):
-        self.id = id
-        self.url = url

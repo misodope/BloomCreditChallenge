@@ -3,10 +3,10 @@ import setuptools
 setuptools.setup(
     name='bloom_database',
     version='1',
-    description='derp',
+    description='boop',
     author='Jerry',
     install_requires=[''],
-    author_email='misodope@gmail.com',
+    author_email='jieningjchen@gmail.com',
     package_dir={"": "lib"},
     packages=["bloom_database"],
     zip_safe=False

@@ -13,9 +13,6 @@ class CreditRecordParser:
     def __init__(self):
         pass
 
-    def parse(self):
-        pass
-
     def run():
 
         rows = []
@@ -83,10 +80,3 @@ class CreditRecordParser:
                 )
 
             meta.session.commit()
-
-
-parser = CreditRecordParser()
-
-
-if __name__ == '__main__':
-    parser.run()

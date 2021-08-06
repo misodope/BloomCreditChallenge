@@ -58,7 +58,6 @@ def get_consumer_statistics(credit_tag):
     if not statistics:
         return { "message": f"Statistics not calculating correctly for: {credit_tag}" }, HTTPStatus.NOT_FOUND
 
-
     statistics_dict = statistics._asdict()
 
     return statistics_dict, HTTPStatus.OK

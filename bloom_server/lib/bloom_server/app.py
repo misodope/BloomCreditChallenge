@@ -1,35 +1,20 @@
-import os
-
+from bloom_database.models import models, db
 from http import HTTPStatus
-from flask import Flask
-from flask_migrate import Migrate
 
-from bloom_database.models import db
+from . import create_app
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-app.config['FLASK_APP'] = os.environ['FLASK_APP']
 
-db.init_app(app)
-migrate = Migrate()
-migrate.init_app(app, db)
-
-app.app_context().push()
-
-app_db = db
-
-from bloom_database.models import models
+app = create_app()
 
 @app.route('/')
 def index():
-    return "Hello Bloom Credit"
+    return "Hi Bloom Credit."
 
 @app.route('/credit_record/get/<consumer_id>', methods=['GET'])
 def get_credit_record(consumer_id):
 
     credit_record = (
-        app_db.session.query(*[c.label(c.name) for c in models.CreditRecords.__table__.columns])
+        db.session.query(*[c.label(c.name) for c in models.CreditRecords.__table__.columns])
         .filter(models.CreditRecords.uuid == consumer_id)
     ).one_or_none()
 
@@ -44,7 +29,7 @@ def get_credit_record(consumer_id):
 def get_consumer_statistics(credit_tag):
 
     statistics = (
-        app_db.session.execute(
+        db.session.execute(
             f"""
                 SELECT cast(avg({credit_tag}) as text) as mean, cast(stddev({credit_tag}) as text) as stddev, (
                     SELECT percentile_cont(0.5) WITHIN GROUP (ORDER BY {credit_tag}) FROM credit_records

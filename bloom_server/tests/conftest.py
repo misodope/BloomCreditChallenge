@@ -22,7 +22,7 @@ def init_database():
 
     credit_record = models.CreditRecords(
         name="Jane Doe",
-        uuid="1-uuid-2-uuid-3-uuid",
+        uuid="1337-1337-1337",
         ssn="123456789",
         x0001=123456789,
     )

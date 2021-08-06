@@ -20,14 +20,24 @@ def init_database():
 
     db.create_all()
 
-    credit_record = models.CreditRecords(
+    credit_record_1 = models.CreditRecords(
         name="Jane Doe",
         uuid="1337-1337-1337",
         ssn="123456789",
-        x0001=123456789,
+        x0001=100,
     )
 
-    db.session.add(credit_record)
+    db.session.add(credit_record_1)
+    db.session.commit()
+
+    credit_record_2 = models.CreditRecords(
+        name="Jane Doe",
+        uuid="123-123-123",
+        ssn="987654321",
+        x0001=50,
+    )
+
+    db.session.add(credit_record_2)
     db.session.commit()
 
     yield db

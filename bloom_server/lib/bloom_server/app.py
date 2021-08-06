@@ -28,19 +28,19 @@ def get_credit_record(consumer_id):
 @app.route('/credit_tag/statistics/get/<credit_tag>', methods=['GET'])
 def get_consumer_statistics(credit_tag):
 
-    statistics = (
-        db.session.execute(
-            f"""
-                SELECT cast(avg({credit_tag}) as text) as mean, cast(stddev({credit_tag}) as text) as stddev, (
-                    SELECT percentile_cont(0.5) WITHIN GROUP (ORDER BY {credit_tag}) FROM credit_records
-                ) as median
-                FROM credit_records
-                WHERE {credit_tag} IS NOT NULL
-            """
-        )
-    ).one_or_none()
-
-    if not statistics:
+    try:
+        statistics = (
+            db.session.execute(
+                f"""
+                    SELECT cast(avg({credit_tag}) as text) as mean, cast(stddev({credit_tag}) as text) as stddev, (
+                        SELECT percentile_cont(0.5) WITHIN GROUP (ORDER BY {credit_tag}) FROM credit_records
+                    ) as median
+                    FROM credit_records
+                    WHERE {credit_tag} IS NOT NULL
+                """
+            )
+        ).one_or_none()
+    except:
         return { "message": f"Statistics not calculating correctly for: {credit_tag}" }, HTTPStatus.NOT_FOUND
 
     statistics_dict = statistics._asdict()

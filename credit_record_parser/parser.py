@@ -5,8 +5,7 @@ import uuid
 
 from bz2 import BZ2Decompressor
 
-from bloom_database.models import models
-from bloom_server.app import app_db as meta
+from bloom_database.models import models, db as meta
 
 
 class CreditRecordParser:
